@@ -1,0 +1,2 @@
+# ignore the file, where OpenAI secret API key is stored
+.api_key.txt

@@ -1,0 +1,31 @@
+{'text': '(moody rock music)', 'start': 0.571, 'duration': 2.917}
+{'text': '♪ Sitting in yesterday,\nwatching it slip away today ♪', 'start': 13.114, 'duration': 5.0}
+{'text': '♪ Isolation ♪', 'start': 21.083, 'duration': 3.637}
+{'text': '♪ Fading like photographs,\nreminding us nothing ever lasts ♪', 'start': 24.72, 'duration': 5.0}
+{'text': '♪ Desolation ♪', 'start': 32.875, 'duration': 4.114}
+{'text': '♪ I look up to the sky\nbut the sun never shines ♪', 'start': 36.989, 'duration': 5.0}
+{'text': "♪ I'm waiting ♪", 'start': 44.568, 'duration': 2.898}
+{'text': "♪ There's a thousand\ndifferent shades of darkness ♪", 'start': 47.466, 'duration': 5.0}
+{'text': '♪ Coloring our faith ♪', 'start': 53.694, 'duration': 5.0}
+{'text': "♪ The past is dead, the future's haunted ♪", 'start': 59.74, 'duration': 5.0}
+{'text': '♪ What happened to today, today ♪', 'start': 65.485, 'duration': 4.0}
+{'text': '♪ Promises built to crash ♪', 'start': 84.214, 'duration': 2.748}
+{'text': '♪ Walking on dreams and broken glass ♪', 'start': 86.962, 'duration': 5.0}
+{'text': "♪ Hell's creation ♪", 'start': 92.489, 'duration': 3.279}
+{'text': '♪ Try to find my escape ♪', 'start': 95.768, 'duration': 2.954}
+{'text': '♪ Somewhere where I can hide away ♪', 'start': 98.722, 'duration': 5.0}
+{'text': '♪ Desperation ♪', 'start': 104.062, 'duration': 4.008}
+{'text': '♪ I look up to the sky\nbut the sun never shines ♪', 'start': 108.07, 'duration': 5.0}
+{'text': "♪ I'm waiting, yeah ♪", 'start': 115.579, 'duration': 3.054}
+{'text': "♪ There's a thousand\ndifferent shades of darkness ♪", 'start': 118.633, 'duration': 5.0}
+{'text': '♪ Coloring our faith ♪', 'start': 124.695, 'duration': 5.0}
+{'text': "♪ The past is dead, the future's haunted ♪", 'start': 130.635, 'duration': 5.0}
+{'text': '♪ What happened to today, today ♪', 'start': 136.575, 'duration': 4.0}
+{'text': "♪ There's a thousand\ndifferent shades of darkness ♪", 'start': 189.804, 'duration': 5.0}
+{'text': '♪ Coloring our faith ♪', 'start': 195.792, 'duration': 5.0}
+{'text': "♪ The past is dead, the future's haunted ♪", 'start': 201.735, 'duration': 5.0}
+{'text': '♪ What happened to today, today ♪', 'start': 207.707, 'duration': 5.0}
+{'text': "♪ There's a thousand\ndifferent shades of darkness ♪", 'start': 213.716, 'duration': 5.0}
+{'text': '♪ Coloring our faith ♪', 'start': 219.513, 'duration': 5.0}
+{'text': "♪ The past is dead, the future's haunted ♪", 'start': 225.405, 'duration': 5.0}
+{'text': '♪ What happened to today, today ♪', 'start': 231.363, 'duration': 4.0}
