@@ -43,12 +43,16 @@ from tkinter import *
 from tkinter import messagebox
 from functools import partial
 
-# Preferably, hide the variable below:
-with open(".api_key", "r") as f:
-    for line in f:
-        key = line
+def get_api_key():
+    try:
+        with open(".api_key.txt", "r") as f:
+            for line in f:
+                key = line
+        print("API key retrieved successfully")
+        return key
+    except Exception as e:
+        print(f"An error occurred while retrieving API key: {e}")
 
-print(key)
 
 # This function downloads the subtitles of a video, based on the
 # input of a URL done by the user, and saves it in "subtitles.txt" file
@@ -216,60 +220,8 @@ def window():
                   width=100,)
     answer.pack()
     answer.insert(END,"test")
-
-#     Text(
-#     master: Misc | None = None,
-#     cnf: dict[str, Any] | None = {},
-#     *,
-#     autoseparators: bool = ...,
-#     background: str = ...,
-#     bd: _ScreenUnits = ...,
-#     bg: str = ...,
-#     blockcursor: bool = ...,
-#     border: _ScreenUnits = ...,
-#     borderwidth: _ScreenUnits = ...,
-#     cursor: _Cursor = ...,
-#     endline: int | Literal[''] = ...,
-#     exportselection: bool = ...,
-#     fg: str = ...,
-#     font: _FontDescription = ...,
-#     foreground: str = ...,
-#     height: _ScreenUnits = ...,
-#     highlightbackground: str = ...,
-#     highlightcolor: str = ...,
-#     highlightthickness: _ScreenUnits = ...,
-#     inactiveselectbackground: str = ...,
-#     insertbackground: str = ...,
-#     insertborderwidth: _ScreenUnits = ...,
-#     insertofftime: int = ...,
-#     insertontime: int = ...,
-#     insertunfocussed: Literal['none', 'hollow', 'solid'] = ...,
-#     insertwidth: _ScreenUnits = ...,
-#     maxundo: int = ...,
-#     name: str = ...,
-#     padx: _ScreenUnits = ...,
-#     pady: _ScreenUnits = ...,
-#     relief: _Relief = ...,
-#     selectbackground: str = ...,
-#     selectborderwidth: _ScreenUnits = ...,
-#     selectforeground: str = ...,
-#     setgrid: bool = ...,
-#     spacing1: _ScreenUnits = ...,
-#     spacing2: _ScreenUnits = ...,
-#     spacing3: _ScreenUnits = ...,
-#     startline: int | Literal[''] = ...,
-#     state: Literal['normal', 'disabled'] = ...,
-#     tabs: _ScreenUnits | tuple[_ScreenUnits, ...] = ...,
-#     tabstyle: Literal['tabular', 'wordprocessor'] = ...,
-#     takefocus: _TakeFocusValue = ...,
-#     undo: bool = ...,
-#     width: int = ...,
-#     wrap: Literal['none', 'char', 'word'] = ...,
-#     xscrollcommand: _XYScrollCommand = ...,
-#     yscrollcommand: _XYScrollCommand = ...
-# )
-
     window.mainloop()
+
 
 def choose_prompt(radio_button_x):
     if(radio_button_x.get()==0):
@@ -281,8 +233,12 @@ def choose_prompt(radio_button_x):
     else:
         print("No prompt has been chosen")
 
+
 def main():
+    api_key = get_api_key()
     window()
+    # gui.window()
+
 
 if __name__ == "__main__":
     # Open app GUI

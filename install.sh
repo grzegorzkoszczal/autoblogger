@@ -25,3 +25,4 @@ fi
 echo "Installing dependencies"
 install=$(pip install -r requirements.txt)
 verify=$(pip list)
+echo "(Advice) If You are running Your code in VS Code, use ctrl+shift+p in order to clear Python cache and reload window"
