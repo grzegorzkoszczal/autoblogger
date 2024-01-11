@@ -1,2 +1,17 @@
 # ignore the file, where OpenAI secret API key is stored
 .api_key.txt
+
+# ignore virtual environment, that should be created by the developer
+# using the "install.sh" script
+.autoblogger_dev
+
+# ignore scipts locally compiled to bytecode
+__pycache__
+
+# those text files are created by the user by pasting the video URL
+input.txt
+subtitles.txt
+
+# those scripts are for development purposes
+dev.py
+gui.py
