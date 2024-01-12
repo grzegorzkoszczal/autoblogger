@@ -39,7 +39,7 @@ import gui
 import os
 import time
 import re
-import openai
+from openai import OpenAI
 import pandas as pd
 from youtube_transcript_api import YouTubeTranscriptApi
 from tkinter import *
@@ -113,7 +113,7 @@ def manage_subtitles():
         print(f'An error occurred while managing the subtitles: {e}')
 
 
-def chatgpt(radio_button_x):
+def chatgpt(radio_button_x, api_key, answer):
     which_prompt = radio_button_x.get()
     # radio_button_requests = [
     #     "Based on the subtitles of the video, write a short blog entry about the topic of a video: ",
@@ -121,23 +121,27 @@ def chatgpt(radio_button_x):
     #     "Given the subtitles of a video, guess what is the topic of it: "
     # ]
     prompts = {
-        0: "Write a blog entry based on subtitles: ",
-        1: "Explain emotions in song lyrics: ",
-        2: "Guess what is this video about, based on these subtitles: "
+        0: "Write a blog entry based on video subtitles, presented in double quotation marks: ",
+        1: "Explain emotions in song lyrics, presented in double quotation marks: ",
+        2: "Guess what is this video about, based on these subtitles presented in double quotation marks: : "
     }
     # https://www.youtube.com/watch?v=ZNVs-dfFUj0
     with open("input.txt", "r") as f:
         subtitles = f.readline()
     user_command = prompts.get(which_prompt)
-    print(user_command+"\""+subtitles+"\"")
+    # print("User: "+user_command+"\""+subtitles+"\"")
+
+    # ChatGPT part
+    client = OpenAI(api_key=api_key)
     messages = [ {"role": "system", "content": "You are a intelligent assistant."} ]
     message = user_command
     if message: 
         messages.append({"role": "user", "content": message},)
-        chat = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages) 
+        chat = client.chat.completions.create(model="gpt-3.5-turbo", messages=messages) 
         
     reply = chat.choices[0].message.content 
-    print(f"ChatGPT: {reply}") 
+    # print(f"ChatGPT: {reply}") 
+    answer.insert(END,reply)
     messages.append({"role": "assistant", "content": reply})
 
 
@@ -209,26 +213,24 @@ def window(api_key):
         radio_button.pack(pady=5, anchor=CENTER)
 
 
-    # Button - ask ChatGPT
-    button_prompt = Button(window,
-                           text="Pass the prompt",
-                           command=partial(chatgpt, radio_button_x),
-                           font=("Arial", 20, "bold"),
-                           fg="black",
-                           bg="white",
-                           width=30
-                    )
-    button_prompt.pack(pady=30)
-
-    
     # A field with an answer given back by ChatGPT
     answer = Text(window,
                   name="text field",
                   background="white",
                   height=15,
                   width=100,)
+
+    # Button - ask ChatGPT
+    button_prompt = Button(window,
+                           text="Pass the prompt",
+                           command=partial(chatgpt, radio_button_x, api_key, answer),
+                           font=("Arial", 20, "bold"),
+                           fg="black",
+                           bg="white",
+                           width=30
+                    )
+    button_prompt.pack(pady=30)
     answer.pack()
-    answer.insert(END,"test")
 
     window.mainloop()
 
