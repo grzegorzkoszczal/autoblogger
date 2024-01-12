@@ -13,9 +13,12 @@
 #    I) A good idea would be a script that automatically creates Python
 #    virtual environment and pulls the dependencies.
 
-# Test case below:
+# Test cases below:
 # Ozzy Osbourne - A Thousand Shades
 # https://www.youtube.com/watch?v=ZNVs-dfFUj0
+# Marty Robbins - Big Iron
+# https://www.youtube.com/watch?v=AXpx3pIwjjg
+
 
 
 
@@ -43,6 +46,11 @@ from tkinter import *
 from tkinter import messagebox
 from functools import partial
 
+
+# Useful links:
+# Quickstart guide: https://platform.openai.com/docs/quickstart?context=python
+# API-keys: https://platform.openai.com/api-keys
+# Retrieve the personal secret OpenAI API key
 def get_api_key():
     try:
         with open(".api_key.txt", "r") as f:
@@ -54,11 +62,13 @@ def get_api_key():
         print(f"An error occurred while retrieving API key: {e}")
 
 
-# This function downloads the subtitles of a video, based on the
-# input of a URL done by the user, and saves it in "subtitles.txt" file
-def download_subtitles(youtube_url):
+# This function takes the user input (YouTube video URL), downloads the
+# subtitles of a video, and saves it in "subtitles.txt" file
+def download_subtitles(entry):
     try:
-        youtube_id = youtube_url.split("https://www.youtube.com/watch?v=", 1)[1]
+        url = entry.get()
+        print("URL entered: ", url)
+        youtube_id = url.split("https://www.youtube.com/watch?v=", 1)[1]
         output_file = "subtitles.txt"
         # assigning srt variable with the list 
         # of dictionaries obtained by the get_transcript() function
@@ -77,41 +87,46 @@ def download_subtitles(youtube_url):
 
             print(f'Subtitles downloaded successfully and saved to {output_file}')
         manage_subtitles()
+
     except Exception as e:
-        print(f'An error occurred: {e}')
+        print(f'An error occurred while downloading the subtitles: {e}')
 
 
 # This function prepares downloaded subtitles to be easier to read as an input
 # for a prompt, that will be used for ChatGPT
 def manage_subtitles():
-    delimiters = "{\'text\': \'", "{'text': \"", "', 'start'", "\", 'start'"
-    regex_pattern = '|'.join(map(re.escape, delimiters))
+    try:
+        delimiters = "{\'text\': \'", "{'text': \"", "', 'start'", "\", 'start'"
+        regex_pattern = '|'.join(map(re.escape, delimiters))
 
-    input = open("input.txt", "w")
+        with open("input.txt", "w") as input:
+            with open("subtitles.txt", "r") as f:
+                for line in f:
+                    result = re.split(regex_pattern, line)[1]
+                    result = result.replace("♪ ","")
+                    result = result.replace(" ♪","")
+                    result = result.replace("\\n"," ")
+                    input.write(result+". ")
+                    # print(result)
 
-    with open("subtitles.txt", "r") as f:
-        for line in f:
-            result = re.split(regex_pattern, line)[1]
-            result = result.replace("♪ ","")
-            result = result.replace(" ♪","")
-            result = result.replace("\\n"," ")
-            input.write(result+". ")
-            print(result)
-
-    input.close()
-    # chatgpt()
-
-
-def prompt():
-    answer.get
-    print("Here You pass the subtitles to ChatGPT")
+    except Exception as e:
+        print(f'An error occurred while managing the subtitles: {e}')
 
 
-def chatgpt():
+def chatgpt(radio_button_x):
+    which_prompt = radio_button_x.get()
+    prompts = {
+        0: "Write a blog entry based on subtitles: ",
+        1: "Explain emotions in song lyrics: ",
+        2: "Guess what is this video about, based on these subtitles: "
+    }
+    # https://www.youtube.com/watch?v=ZNVs-dfFUj0
+    with open("input.txt", "r") as f:
+        subtitles = f.readline()
+    user_command = prompts.get(which_prompt)
+    print(user_command+"\""+subtitles+"\"")
     messages = [ {"role": "system", "content": "You are a intelligent assistant."} ]
-
-    # while True: 
-    message = input("User : ") 
+    message = user_command
     if message: 
         messages.append({"role": "user", "content": message},)
         chat = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages) 
@@ -122,11 +137,8 @@ def chatgpt():
 
 
 # Here is created a simple graphical layout of an application
-def window():
-    def submit_url():
-        youtube_url = entry.get()
-        print("URL entered: ", youtube_url)
-        download_subtitles(youtube_url)
+def window(api_key):
+
 
     # Create GUI window
     window = Tk()
@@ -151,7 +163,7 @@ def window():
     # Button - confirm download of subtitles from URL
     button_download = Button(window,
                              text="Download subtitles",
-                             command=submit_url,
+                             command=partial(download_subtitles, entry),
                              font=("Arial", 20, "bold"),
                              fg="black",
                              bg="white",
@@ -195,15 +207,14 @@ def window():
                                    font=("Arial", 12, "bold"),
                                    fg="black",
                                    bg="white",
-                                   width=30,
-                                   command=partial(choose_prompt, radio_button_x))
+                                   width=30)
         radio_button.pack(pady=5, anchor=CENTER)
 
 
-    # Button - pass the prompt
+    # Button - ask ChatGPT
     button_prompt = Button(window,
                            text="Pass the prompt",
-                           command=prompt,
+                           command=partial(chatgpt, radio_button_x),
                            font=("Arial", 20, "bold"),
                            fg="black",
                            bg="white",
@@ -220,23 +231,14 @@ def window():
                   width=100,)
     answer.pack()
     answer.insert(END,"test")
+
     window.mainloop()
-
-
-def choose_prompt(radio_button_x):
-    if(radio_button_x.get()==0):
-        print("Blog entry based on subtitles")
-    elif(radio_button_x.get()==1):
-        print("Explain emotions in song lyrics")
-    elif(radio_button_x.get()==2):
-        print("Guess what is this video about")
-    else:
-        print("No prompt has been chosen")
 
 
 def main():
     api_key = get_api_key()
-    window()
+    window(api_key)
+
     # gui.window()
 
 
