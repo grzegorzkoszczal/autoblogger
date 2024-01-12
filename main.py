@@ -115,6 +115,11 @@ def manage_subtitles():
 
 def chatgpt(radio_button_x):
     which_prompt = radio_button_x.get()
+    # radio_button_requests = [
+    #     "Based on the subtitles of the video, write a short blog entry about the topic of a video: ",
+    #     "Describe the emotion that are shown in lyrics of this song: ",
+    #     "Given the subtitles of a video, guess what is the topic of it: "
+    # ]
     prompts = {
         0: "Write a blog entry based on subtitles: ",
         1: "Explain emotions in song lyrics: ",
@@ -181,13 +186,6 @@ def window(api_key):
         "Explain emotions in song lyrics",
         "Guess what is this video about"
     ]
-
-    # radio_button_requests = [
-    #     "Based on the subtitles of the video, write a short blog entry about the topic of a video: ",
-    #     "Describe the emotion that are shown in lyrics of this song: ",
-    #     "Given the subtitles of a video, guess what is the topic of it: "
-    # ]
-
 
     # Text that suggests You to choose the task You want to give to ChatGPT
     label2 = Label(window,
