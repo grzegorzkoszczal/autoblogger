@@ -10,5 +10,5 @@ The main goal of this repo is to showcase a simple applications that incorporate
 
 In order to download the entire repo, clone it in the chosen directory
 ```console
-foo@bar:~$ git clone https://github.com/grzegorzkoszczal/python-platformer-for-resume.git
+foo@bar:~$ git clone https://github.com/grzegorzkoszczal/autoblogger.git
 ```
