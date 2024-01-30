@@ -12,11 +12,3 @@ __pycache__
 build
 dist
 main.spec
-
-# those text files are created by the user by pasting the video URL
-input.txt
-subtitles.txt
-
-# those scripts are for development purposes
-dev.py
-gui.py
