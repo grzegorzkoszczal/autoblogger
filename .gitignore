@@ -7,11 +7,3 @@
 
 # ignore scipts locally compiled to bytecode
 __pycache__
-
-# those text files are created by the user by pasting the video URL
-input.txt
-subtitles.txt
-
-# those scripts are for development purposes
-dev.py
-gui.py
