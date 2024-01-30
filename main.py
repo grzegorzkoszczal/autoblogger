@@ -1,34 +1,18 @@
 # Autoblogger for resume
 
-# Test cases below:
-# Ozzy Osbourne - A Thousand Shades
-# https://www.youtube.com/watch?v=ZNVs-dfFUj0
-# Marty Robbins - Big Iron
-# https://www.youtube.com/watch?v=AXpx3pIwjjg
-
-
-
 from openai import OpenAI
 from youtube_transcript_api import YouTubeTranscriptApi
 from tkinter import *
 from functools import partial
 
+# Test case below:
+# Ozzy Osbourne - A Thousand Shades
+# https://www.youtube.com/watch?v=ZNVs-dfFUj0
 
 # Useful links:
 # Quickstart guide: https://platform.openai.com/docs/quickstart?context=python
 # API-keys: https://platform.openai.com/api-keys
 # Retrieve the personal secret OpenAI API key
-def get_api_key():
-    try:
-        with open(".api_key.txt", "r") as f:
-            for line in f:
-                key = line
-        print("API key retrieved successfully")
-        return key
-    
-    except Exception as e:
-        print(f"An error occurred while retrieving API key: {e}")
-
 
 # This function takes the user input (YouTube video URL), downloads the
 # subtitles of a video, and saves it in "subtitles" global variable
@@ -55,7 +39,7 @@ def download_subtitles(entry):
         print(f'An error occurred while downloading the subtitles: {e}')
 
 
-def chatgpt(window, radio_button_x, api_key, answer_box):
+def chatgpt(window, radio_button_x, answer_box, entry_key):
     if answer_box.compare("end-1c", "!=", "1.0"):
         answer_box.delete("1.0", END)
 
@@ -65,15 +49,14 @@ def chatgpt(window, radio_button_x, api_key, answer_box):
     which_prompt = radio_button_x.get()
     prompts = {
         0: "Write a blog entry based on video subtitles, presented in double quotation marks: ",
-        1: "Describe emotions in song lyrics, presented in double quotation marks: ",
+        1: "Explain emotions in song lyrics, presented in double quotation marks: ",
         2: "Guess what is this video about, based on these subtitles presented in double quotation marks: "
     }
     user_command = prompts.get(which_prompt)
     user_command = "User: "+user_command+"\""+subtitles+"\""
-    print(user_command)
 
     # Implementing responses from ChatGPT
-    client = OpenAI(api_key=api_key)
+    client = OpenAI(api_key=entry_key.get())
     MODEL = "gpt-3.5-turbo"
     response = client.chat.completions.create(
         model=MODEL,
@@ -89,7 +72,7 @@ def chatgpt(window, radio_button_x, api_key, answer_box):
 
 
 # Here is created a simple graphical layout of an application
-def menu(api_key):
+def main():
 
 
     # Create GUI window
@@ -156,7 +139,6 @@ def menu(api_key):
                                    bg="white",
                                    width=30)
         radio_button.pack(pady=5, anchor=CENTER)
-    
 
 
     # A field with an answer given back by ChatGPT
@@ -167,10 +149,16 @@ def menu(api_key):
                   width=100,)
 
 
+    # Text field - paste the ChatGPT secret API key
+    entry_key = Entry(window,
+                    width=200,
+                    font=("Arial", 10))
+    
+
     # Button - ask ChatGPT
     button_prompt = Button(window,
                            text="Pass the prompt",
-                           command=partial(chatgpt, window, radio_button_x, api_key, answer_box),
+                           command=partial(chatgpt, window, radio_button_x, answer_box, entry_key),
                            font=("Arial", 20, "bold"),
                            fg="black",
                            bg="white",
@@ -188,21 +176,10 @@ def menu(api_key):
                    font=("Arial", 10, "bold"),
                    fg="white",
                    bg="black")
-    # label3.pack(padx=50, side=LEFT)
-
-
-    # Text field - paste the ChatGPT secret API key
-    entry2 = Entry(window,
-                    width=200,
-                    font=("Arial", 10))
-    # entry2.pack(padx=50, side=RIGHT)
+    label3.pack(padx=50, side=LEFT)
+    entry_key.pack(padx=50, side=RIGHT)
 
     window.mainloop()
-
-
-def main():
-    api_key = get_api_key()
-    menu(api_key)
 
 
 if __name__ == "__main__":

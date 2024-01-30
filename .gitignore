@@ -8,6 +8,11 @@
 # ignore scipts locally compiled to bytecode
 __pycache__
 
+# ignore folders made by pyinstaller 
+build
+dist
+main.spec
+
 # those text files are created by the user by pasting the video URL
 input.txt
 subtitles.txt
