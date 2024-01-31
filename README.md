@@ -20,3 +20,13 @@ foo@bar:~$ source install.sh
 ```
 It will automatically create Python virtual environment, activate it and pull all the dependecies required
 for the development.
+
+![blog_entry_key](https://github.com/grzegorzkoszczal/autoblogger/assets/141007769/d5b787af-a88f-4656-b189-55afd6db879e)
+
+
+![emotions_key](https://github.com/grzegorzkoszczal/autoblogger/assets/141007769/eda9a4cf-fa0b-435b-b083-31f8d5b4d8b3)
+
+
+![guess_key](https://github.com/grzegorzkoszczal/autoblogger/assets/141007769/8f8a6156-6ec5-4f0e-91f7-b6e490e2d56c)
+
+
