@@ -22,7 +22,7 @@ In order to start using the application right off the bat, one can simply downlo
 
 ### Using the app
 
-1. Execute the "main" file. A small GUI window will pop-up.
+1. Execute the "main_win.exe" file, if You are on Windows or "main_linux", if You are on Linux. A small GUI window will pop-up.
 2. Paste the YouTube video URL (Important! Check beforehand, if the video have the subtitles available, otherwise it will not be possible to get the transcript!)
 3. Click the "Download subtitles" button. The subtitle are downloaded, stored and refined by the app.
 4. Paste the secret API key in the text field in the lower-right box.
@@ -57,5 +57,3 @@ In order to install all the needed stuff for further development of the code, us
 foo@bar:~/autoblogger$ source install.sh
 ```
 It will automatically create Python virtual environment, activate it and pull all the dependecies required for the development. Modify the project by changing the code in the "main.py" file. After that, follow the steps of the "Using the autoblogger (user path)" subsection in order to create API key.
-
-
