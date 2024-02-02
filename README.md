@@ -22,7 +22,7 @@ In order to start using the application right off the bat, one can simply downlo
 
 ### Using the app
 
-1. Execute the "main" file. A small GUI window will pop-up.
+1. Execute the "main_win.exe" file, if You are on Windows or "main_linux", if You are on Linux. A small GUI window will pop-up.
 2. Paste the YouTube video URL (Important! Check beforehand, if the video have the subtitles available, otherwise it will not be possible to get the transcript!)
 3. Click the "Download subtitles" button. The subtitle are downloaded, stored and refined by the app.
 4. Paste the secret API key in the text field in the lower-right box.
