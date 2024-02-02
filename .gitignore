@@ -4,6 +4,7 @@
 # ignore virtual environment, that should be created by the developer
 # using the "install.sh" script
 .autoblogger_dev
+.autoblogger
 
 # ignore scipts locally compiled to bytecode
 __pycache__
